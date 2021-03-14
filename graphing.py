@@ -1,17 +1,17 @@
 import subprocess
 import codecs
 import matplotlib.pyplot as plt
+from main import *
+from seq_algo import *
 
 
 
 def run_sequential(file1, file2, repeat):
     times = []
     for i in range(repeat):
-        result = subprocess.run(['python3', 'seq-algo.py', file1, file2], stdout=subprocess.PIPE)
-        print(result.stdout)
-        time = str(result.stdout[11:26])
-        normal_str = codecs.decode(time, 'unicode_escape')
-        times.append(float(normal_str[2:len(normal_str) - 1]))
+        time = run_for_timing(file1, file2)
+        times.append(time)
+        print(time)
     return times
 
 def run_parallel(file1, file2, repeat):
@@ -29,8 +29,8 @@ def get_nums():
 
 def plot_sequential_vs_parallel_bar():
     method = ['Sequential', 'Parallel']
-    sequential = run_sequential('a.txt', 'b.txt', 2)
-    parallel = run_parallel('a.txt', 'b.txt', 2)
+    sequential = run_sequential('covid.txt', 'sars.txt', 2)
+    parallel = run_parallel('covid.txt', 'sars.txt', 2)
     times = [sum(sequential) / len(sequential), sum(parallel) / len(parallel)]
     plt.bar(method, times)
     plt.title("Runtime for parallel vs sequential with a 5000 long DNA sequence")
@@ -64,5 +64,6 @@ def plot_sequential_vs_parallel_line():
 
 
 if __name__ == '__main__':
-    plot_sequential_vs_parallel_bar()
-    plot_sequential_vs_parallel_line()
+    # plot_sequential_vs_parallel_bar()
+    # plot_sequential_vs_parallel_line()
+    run_parallel('a.txt', 'b.txt', 1)

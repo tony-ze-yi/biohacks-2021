@@ -23,6 +23,20 @@ def similar(str1, str2):
                 dp[i][j] = 1 + min(dp[i][j-1], dp[i-1][j], dp[i-1][j-1])
     return dp[m][n]
 
+def run_for_timing(stringA, stringB) -> float:
+
+    with open(stringA, "r") as file:
+        string1 = file.read().replace("\n", "")
+
+    with open(stringB, "r") as file:
+        string2 = file.read().replace("\n", "")
+    str_arr1 = np.array(list(string1))
+    str_arr2 = np.array(list(string2))
+
+    start = time.time()
+    res = similar(str_arr1, str_arr2)
+    end = time.time()
+    return end - start
 
 def main():
     parser = argparse.ArgumentParser()
