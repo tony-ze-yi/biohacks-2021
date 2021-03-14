@@ -125,11 +125,9 @@ def plot_sequential_vs_parallel_line():
         "20k.txt",
         "20k_2.txt",
         "50k.txt",
-        "50k_2.txt",
-        "100k.txt",
-        "100k_2.txt",
+        "50k_2.txt"
     ]
-    sizes = [500, 1000, 5000, 10000, 20000, 50000, 100000]
+    sizes = [500, 1000, 5000, 10000, 20000, 50000]
     times_seq = []
     times_parallel = []
     i = 0
@@ -165,11 +163,9 @@ def plot_sequential_vs_parallel_line_custom():
         "20k.txt",
         "20k_2.txt",
         "50k.txt",
-        "50k_2.txt",
-        "100k.txt",
-        "100k_2.txt",
+        "50k_2.txt"
     ]
-    sizes = [500, 1000, 5000, 10000, 20000, 50000, 100000]
+    sizes = [500, 1000, 5000, 10000, 20000, 50000]
     times_seq = []
     times_parallel = []
     i = 0
@@ -193,8 +189,8 @@ def plot_sequential_vs_parallel_line_custom():
 
 def plot_seq_vs_par_both():
     files = ['500.txt', '500_2.txt', '1000.txt', '1000_2.txt', '5000.txt', '5000_2.txt', '10000.txt', '10000_2.txt',
-             '20k.txt', '20k_2.txt', '50k.txt', '50k_2.txt', '100k.txt', '100k_2.txt']
-    sizes = [500, 1000, 5000, 10000, 20000, 50000, 100000]
+             '20k.txt', '20k_2.txt', '50k.txt', '50k_2.txt']
+    sizes = [500, 1000, 5000, 10000, 20000, 50000]
     times_seq = []
     times_parallel = []
     times_seq_custom = []
@@ -228,7 +224,8 @@ def plot_seq_vs_par_both():
 
 
 if __name__ == "__main__":
-    plot_sequential_vs_parallel_bar_custom()
-    plot_sequential_vs_parallel_bar()
-    plot_sequential_vs_parallel_line()
-    plot_sequential_vs_parallel_line_custom()
+    # plot_sequential_vs_parallel_bar_custom()
+    # plot_sequential_vs_parallel_bar()
+    # plot_sequential_vs_parallel_line()
+    # plot_sequential_vs_parallel_line_custom()
+    plot_seq_vs_par_both()
