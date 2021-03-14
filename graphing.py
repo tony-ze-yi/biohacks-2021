@@ -1,6 +1,8 @@
 import subprocess
 import codecs
+import matplotlib
 import matplotlib.pyplot as plt
+matplotlib.use('Agg')
 from main import *
 from seq_algo import *
 
@@ -138,9 +140,9 @@ def plot_sequential_vs_parallel_line():
         times_seq.extend(seq)
         times_parallel.extend(par)
         i += 2
-
-    plt.plot(sizes, times_seq, label="Sequential")
-    plt.plot(sizes, times_parallel, label="Parallel")
+    #
+    # plt.plot(sizes, times_seq, label="Sequential")
+    # plt.plot(sizes, times_parallel, label="Parallel")
 
     plt.xlabel("DNA Sequence length")
 
@@ -176,9 +178,9 @@ def plot_sequential_vs_parallel_line_custom():
         times_seq.extend(seq)
         times_parallel.extend(par)
         i += 2
-
-    plt.plot(sizes, times_seq, label="Sequential")
-    plt.plot(sizes, times_parallel, label="Parallel")
+    #
+    # plt.plot(sizes, times_seq, label="Sequential")
+    # plt.plot(sizes, times_parallel, label="Parallel")
 
     plt.xlabel("DNA Sequence length")
 
@@ -220,10 +222,10 @@ def plot_seq_vs_par_both():
         text_file.write("\nparallel custom\n")
         text_file.write(str(times_par_custom))
 
-    plt.plot(sizes, times_seq, label="Sequential")
-    plt.plot(sizes, times_parallel, label="Parallel")
-    plt.plot(sizes, times_seq_custom, label="Sequential custom algorithm")
-    plt.plot(sizes, times_par_custom, label="Parallel custom algorithm")
+    # plt.plot(sizes, times_seq, label="Sequential")
+    # plt.plot(sizes, times_parallel, label="Parallel")
+    # plt.plot(sizes, times_seq_custom, label="Sequential custom algorithm")
+    # plt.plot(sizes, times_par_custom, label="Parallel custom algorithm")
 
     plt.xlabel("DNA Sequence length")
 
@@ -234,8 +236,8 @@ def plot_seq_vs_par_both():
 
     plt.close()
 
-    plt.plot(sizes, times_par_custom, label="Parallel custom algorithm")
-    plt.plot(sizes, times_parallel, label="Parallel")
+    # plt.plot(sizes, times_par_custom, label="Parallel custom algorithm")
+    # plt.plot(sizes, times_parallel, label="Parallel")
     plt.ylabel("Time (seconds)")
     plt.legend()
     plt.title("Runtime for parallel algorithms with varying sizes")
@@ -243,8 +245,8 @@ def plot_seq_vs_par_both():
 
     plt.close()
 
-    plt.plot(sizes, times_seq, label="Sequential algorithm")
-    plt.plot(sizes, times_seq_custom, label="Custom Sequential algorithm")
+    # plt.plot(sizes, times_seq, label="Sequential algorithm")
+    # plt.plot(sizes, times_seq_custom, label="Custom Sequential algorithm")
     plt.ylabel("Time (seconds)")
     plt.legend()
     plt.title("Runtime for sequential algorithms with varying sizes")
