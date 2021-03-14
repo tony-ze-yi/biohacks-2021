@@ -144,14 +144,16 @@ def regular_alg(string1, string2):
     end_seq = time.time()
     print(res)
     print("Time: {}".format(end_seq - start))
+    seq_runtime = end_seq - start
 
     # parallel
     start = time.time()
-    res = similar_seq(string1, string2)
+    res = similar(string1, string2)
     end = time.time()
     print(res)
     print("Time: {}".format(end - start))
-    return end, end_seq
+    parallel_runtime = end - start
+    return parallel_runtime, seq_runtime
 
 
 def custom_alg(string1, string2):
@@ -180,6 +182,7 @@ def custom_alg(string1, string2):
     end = time.time()
     print(ED[-1, -1])
     print("Time: {}".format(end - start))
+    parallel_runtime = end - start
 
     # seq custom
     start = time.time()
@@ -188,8 +191,9 @@ def custom_alg(string1, string2):
     end_seq = time.time()
     print(ED[-1, -1])
     print("Time: {}".format(end_seq - start))
+    seq_runtime = end_seq - start
 
-    return end, end_seq
+    return parallel_runtime, seq_runtime
 
 
 if __name__ == "__main__":
