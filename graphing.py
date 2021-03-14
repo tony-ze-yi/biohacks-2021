@@ -127,10 +127,10 @@ def plot_sequential_vs_parallel_line():
         "10000_2.txt",
         "20k.txt",
         "20k_2.txt",
-        # "50k.txt",
-        # "50k_2.txt"
+        "50k.txt",
+        "50k_2.txt"
     ]
-    sizes = [500, 1000, 5000, 10000, 20000]
+    sizes = [500, 1000, 5000, 10000, 20000, 50000]
     times_seq = []
     times_parallel = []
     i = 0
@@ -142,8 +142,8 @@ def plot_sequential_vs_parallel_line():
         times_parallel.extend(par)
         i += 2
     #
-    # plt.plot(sizes, times_seq, label="Sequential")
-    # plt.plot(sizes, times_parallel, label="Parallel")
+    plt.plot(sizes, times_seq, label="Sequential")
+    plt.plot(sizes, times_parallel, label="Parallel")
 
     plt.xlabel("DNA Sequence length")
 
@@ -165,10 +165,10 @@ def plot_sequential_vs_parallel_line_custom():
         "10000_2.txt",
         "20k.txt",
         "20k_2.txt",
-        # "50k.txt",
-        # "50k_2.txt"
+        "50k.txt",
+        "50k_2.txt"
     ]
-    sizes = [500, 1000, 5000, 10000, 20000]
+    sizes = [500, 1000, 5000, 10000, 20000, 50000]
     times_seq = []
     times_parallel = []
     i = 0
@@ -180,8 +180,8 @@ def plot_sequential_vs_parallel_line_custom():
         times_parallel.extend(par)
         i += 2
     #
-    # plt.plot(sizes, times_seq, label="Sequential")
-    # plt.plot(sizes, times_parallel, label="Parallel")
+    plt.plot(sizes, times_seq, label="Sequential")
+    plt.plot(sizes, times_parallel, label="Parallel")
 
     plt.xlabel("DNA Sequence length")
 
@@ -193,8 +193,9 @@ def plot_sequential_vs_parallel_line_custom():
 
 def plot_seq_vs_par_both():
     files = ['500.txt', '500_2.txt', '1000.txt', '1000_2.txt', '5000.txt', '5000_2.txt', '10000.txt', '10000_2.txt',
-             '20k.txt', '20k_2.txt']
-    sizes = [500, 1000, 5000, 10000, 20000]
+             '20k.txt', '20k_2.txt',"50k.txt",
+        "50k_2.txt"]
+    sizes = [500, 1000, 5000, 10000, 20000, 50000]
     times_seq = []
     times_parallel = []
     times_seq_custom = []
@@ -224,10 +225,10 @@ def plot_seq_vs_par_both():
         text_file.write("\nparallel custom\n")
         text_file.write(str(times_par_custom))
 
-    # plt.plot(sizes, times_seq, label="Sequential")
-    # plt.plot(sizes, times_parallel, label="Parallel")
-    # plt.plot(sizes, times_seq_custom, label="Sequential custom algorithm")
-    # plt.plot(sizes, times_par_custom, label="Parallel custom algorithm")
+    plt.plot(sizes, times_seq, label="Sequential")
+    plt.plot(sizes, times_parallel, label="Parallel")
+    plt.plot(sizes, times_seq_custom, label="Sequential custom algorithm")
+    plt.plot(sizes, times_par_custom, label="Parallel custom algorithm")
 
     plt.xlabel("DNA Sequence length")
 
@@ -238,8 +239,8 @@ def plot_seq_vs_par_both():
 
     plt.close()
 
-    # plt.plot(sizes, times_par_custom, label="Parallel custom algorithm")
-    # plt.plot(sizes, times_parallel, label="Parallel")
+    plt.plot(sizes, times_par_custom, label="Parallel custom algorithm")
+    plt.plot(sizes, times_parallel, label="Parallel")
     plt.ylabel("Time (seconds)")
     plt.legend()
     plt.title("Runtime for parallel algorithms with varying sizes")
@@ -247,8 +248,8 @@ def plot_seq_vs_par_both():
 
     plt.close()
 
-    # plt.plot(sizes, times_seq, label="Sequential algorithm")
-    # plt.plot(sizes, times_seq_custom, label="Custom Sequential algorithm")
+    plt.plot(sizes, times_seq, label="Sequential algorithm")
+    plt.plot(sizes, times_seq_custom, label="Custom Sequential algorithm")
     plt.ylabel("Time (seconds)")
     plt.legend()
     plt.title("Runtime for sequential algorithms with varying sizes")
@@ -270,7 +271,7 @@ def plot_covid():
 if __name__ == "__main__":
     # plot_sequential_vs_parallel_bar_custom()
     # plot_sequential_vs_parallel_bar()
-    # plot_sequential_vs_parallel_line()
-    # plot_sequential_vs_parallel_line_custom()
-    # plot_seq_vs_par_both()
+    plot_sequential_vs_parallel_line()
+    plot_sequential_vs_parallel_line_custom()
+    plot_seq_vs_par_both()
     plot_covid()
