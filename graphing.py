@@ -262,6 +262,7 @@ def plot_covid():
             [par_time, seq_time, par_time_custom, seq_time_custom])
     plt.xlabel("Algorithms")
     plt.ylabel("Time (seconds)")
+    plt.title("Runtime on SARS vs COVID genome (60k letters)")
     plt.savefig("bar_all.png", dpi=200)
     plt.close()
 
