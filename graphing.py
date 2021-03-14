@@ -2,6 +2,7 @@ import subprocess
 import codecs
 import matplotlib
 import matplotlib.pyplot as plt
+
 matplotlib.use('Agg')
 from main import *
 from seq_algo import *
@@ -19,7 +20,7 @@ def run_sequential(file1, file2, repeat):
         print(result.stdout)
         time = str(result.stdout[11:26])
         normal_str = codecs.decode(time, "unicode_escape")
-        times.append(float(normal_str[2 : len(normal_str) - 1]))
+        times.append(float(normal_str[2: len(normal_str) - 1]))
     return times
 
 
@@ -32,7 +33,7 @@ def run_parallel(file1, file2, repeat):
         print(result.stdout)
         time = str(result.stdout[11:26])
         normal_str = codecs.decode(time, "unicode_escape")
-        times.append(float(normal_str[2 : len(normal_str) - 1]))
+        times.append(float(normal_str[2: len(normal_str) - 1]))
     return times
 
 
@@ -189,6 +190,7 @@ def plot_sequential_vs_parallel_line_custom():
     plt.title("Runtime for sequential and parallel algorithms with varying sizes")
     plt.savefig("Line graph seq vs parallel custom algo.png", dpi=200)
 
+
 def plot_seq_vs_par_both():
     files = ['500.txt', '500_2.txt', '1000.txt', '1000_2.txt', '5000.txt', '5000_2.txt', '10000.txt', '10000_2.txt',
              '20k.txt', '20k_2.txt']
@@ -205,7 +207,7 @@ def plot_seq_vs_par_both():
         times_seq_custom.extend(seq)
         times_par_custom.extend(par)
 
-        data = run_both_regular(files[i], files[i+1], 1)
+        data = run_both_regular(files[i], files[i + 1], 1)
         seq = data[0]
         par = data[1]
         times_seq.extend(seq)
@@ -253,10 +255,21 @@ def plot_seq_vs_par_both():
     plt.savefig("Line graph just sequential.png", dpi=200)
 
 
+def plot_covid():
+    par_time, seq_time = regular_alg(covid, sars)
+    par_time_custom, seq_time_custom = custom_alg(covid, sars)
+    plt.bar(["parallel", "sequential", "parallel custom", "sequential custom"],
+            [par_time, seq_time, par_time_custom, seq_time_custom])
+    plt.xlabel("Algorithms")
+    plt.ylabel("Time (seconds)")
+    plt.savefig("bar_all.png", dpi=200)
+    plt.close()
+
 
 if __name__ == "__main__":
     # plot_sequential_vs_parallel_bar_custom()
-    plot_sequential_vs_parallel_bar()
+    # plot_sequential_vs_parallel_bar()
     # plot_sequential_vs_parallel_line()
     # plot_sequential_vs_parallel_line_custom()
-    plot_seq_vs_par_both()
+    # plot_seq_vs_par_both()
+    plot_covid()
