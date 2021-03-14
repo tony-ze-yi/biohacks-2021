@@ -58,7 +58,7 @@ def main():
     print("Time: {}".format(end - start))
 
     # parallel
-    # sigma = {"A": 0, "T": 1, "C": 2, "G": 3}
+    sigma_seq = {"A": 0, "T": 1, "C": 2, "G": 3}
     sigma = Dict.empty(key_type=types.unicode_type, value_type=types.int64)
     sigma["A"] = 0
     sigma["C"] = 1
@@ -71,10 +71,22 @@ def main():
     m = str_arr1.size
     n = str_arr2.size
     MI = np.zeros((u, n), dtype=int)
+    MI_seq = np.zeros((u, n), dtype=int)
     ED = np.zeros((m, n), dtype=int)
+    ED_seq = np.zeros((m, n), dtype=int)
+
+    # parallel custom
     start = time.time()
     compute_mi(MI, u, n, sigma_reverse, string2)
     compute_edt(MI, ED, string1, m, n)
+    end = time.time()
+    print(ED[-1, -1])
+    print("Time: {}".format(end - start))
+
+    # seq custom
+    start = time.time()
+    compute_mi_seq(MI_seq, u, n, sigma_reverse, string2)
+    compute_edt_seq(MI_seq, ED_seq, sigma_seq, string1, m, n)
     end = time.time()
     print(ED[-1, -1])
     print("Time: {}".format(end - start))
@@ -123,6 +135,47 @@ def compute_edt(MI, ED, str_arr1, m, n):
                 )
                 # else:
                 # print("Not supposed to reach here")
+
+
+def compute_mi_seq(MI, u, n, sigma, str_arr2):
+    for i in range(0, u):  # parallelize this
+        for j in range(0, n):
+            if j == 0 and sigma[i] != str_arr2[j]:
+                MI[i, j] = -1
+            elif sigma[i] == str_arr2[j]:
+                MI[i, j] = j
+            else:
+                MI[i, j] = MI[i, j - 1]
+
+
+def compute_edt_seq(MI, ED, sigma, str_arr1, m, n):
+    for i in range(0, m):  # str arr1
+        for j in range(0, n):  # str arr2, parallelize this
+            lmi = MI[sigma[str_arr1[i]], j]
+            # if str_arr1[i] == "A":
+            #     lmi = MI[0, j]
+            # elif str_arr1[i] == "C":
+            #     lmi = MI[1, j]
+            # elif str_arr1[i] == "T":
+            #     lmi = MI[2, j]
+            # else:
+            #     lmi = MI[3, j]
+
+            if j == 0:
+                ED[i, j] = i
+            elif i == 0:
+                ED[i, j] = j
+            elif j == lmi:  # lmi
+                ED[i, j] = ED[i - 1, j - 1]
+            elif lmi == -1:
+                ED[i, j] = min(ED[i - 1, j - 1] + 1, ED[i - 1, j] + 1)
+            # elif j < lmi:
+            else:
+                ED[i, j] = min(
+                    ED[i - 1, j - 1] + 1,
+                    ED[i - 1, j] + 1,
+                    ED[i - 1, lmi - 1] + (j - lmi),
+                )
 
 
 if __name__ == "__main__":
