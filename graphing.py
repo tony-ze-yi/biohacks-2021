@@ -210,6 +210,16 @@ def plot_seq_vs_par_both():
         times_parallel.extend(par)
         i += 2
 
+    with open("Output.txt", "w") as text_file:
+        text_file.write("\nsequential\n")
+        text_file.write(str(times_seq))
+        text_file.write("\nparallel\n")
+        text_file.write(str(times_parallel))
+        text_file.write("\nsequential custom\n")
+        text_file.write(str(times_seq_custom))
+        text_file.write("\nparallel custom\n")
+        text_file.write(str(times_par_custom))
+
     plt.plot(sizes, times_seq, label="Sequential")
     plt.plot(sizes, times_parallel, label="Parallel")
     plt.plot(sizes, times_seq_custom, label="Sequential custom algorithm")
@@ -222,10 +232,29 @@ def plot_seq_vs_par_both():
     plt.title("Runtime for sequential and parallel algorithms with varying sizes")
     plt.savefig("Line graph seq vs parallel custom algo.png", dpi=200)
 
+    plt.close()
+
+    plt.plot(sizes, times_par_custom, label="Parallel custom algorithm")
+    plt.plot(sizes, times_parallel, label="Parallel")
+    plt.ylabel("Time (seconds)")
+    plt.legend()
+    plt.title("Runtime for parallel algorithms with varying sizes")
+    plt.savefig("Line graph just parallel.png", dpi=200)
+
+    plt.close()
+
+    plt.plot(sizes, times_seq, label="Sequential algorithm")
+    plt.plot(sizes, times_seq_custom, label="Custom Sequential algorithm")
+    plt.ylabel("Time (seconds)")
+    plt.legend()
+    plt.title("Runtime for sequential algorithms with varying sizes")
+    plt.savefig("Line graph just sequential.png", dpi=200)
+
+
 
 if __name__ == "__main__":
     # plot_sequential_vs_parallel_bar_custom()
-    # plot_sequential_vs_parallel_bar()
+    plot_sequential_vs_parallel_bar()
     # plot_sequential_vs_parallel_line()
     # plot_sequential_vs_parallel_line_custom()
     plot_seq_vs_par_both()
