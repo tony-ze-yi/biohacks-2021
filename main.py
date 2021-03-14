@@ -6,11 +6,12 @@ from numba import types
 from numba.typed import Dict, List
 
 # constants
-with open("sars.txt", 'r') as sars_file:
-    sars = sars_file.read().replace('\n', '')
+with open("sars.txt", "r") as sars_file:
+    sars = sars_file.read().replace("\n", "")
 
-with open("covid19.txt", 'r') as covid_file:
-    covid = covid_file.read().replace('\n', '')
+with open("covid19.txt", "r") as covid_file:
+    covid = covid_file.read().replace("\n", "")
+
 
 @jit
 def similar(str1, str2):
