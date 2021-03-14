@@ -128,8 +128,34 @@ def plot_sequential_vs_parallel_line():
     plt.title("Runtime for sequential and parallel algorithms with varying sizes")
     plt.savefig("Line graph seq vs parallel.png", dpi=200)
 
+def plot_sequential_vs_parallel_line_custom():
+    files = ['500.txt', '500_2.txt', '1000.txt', '1000_2.txt', '5000.txt', '5000_2.txt', '10000.txt', '10000_2.txt',
+             '20k.txt', '20k_2.txt', '50k.txt', '50k_2.txt', '100k.txt', '100k_2.txt']
+    sizes = [500, 1000, 5000, 10000, 20000, 50000, 100000]
+    times_seq = []
+    times_parallel = []
+    i = 0
+    while i < len(files):
+        data = run_both_custom(files[i], files[i+1], 1)
+        seq = data[0]
+        par = data[1]
+        times_seq.extend(seq)
+        times_parallel.extend(par)
+        i += 2
+
+    plt.plot(sizes, times_seq, label="Sequential")
+    plt.plot(sizes, times_parallel, label="Parallel")
+
+    plt.xlabel("DNA Sequence length")
+
+    plt.ylabel("Time (seconds)")
+    plt.legend()
+    plt.title("Runtime for sequential and parallel algorithms with varying sizes")
+    plt.savefig("Line graph seq vs parallel custom algo.png", dpi=200)
+
 
 if __name__ == '__main__':
     plot_sequential_vs_parallel_bar_custom()
     plot_sequential_vs_parallel_bar()
     plot_sequential_vs_parallel_line()
+    plot_sequential_vs_parallel_line_custom()
